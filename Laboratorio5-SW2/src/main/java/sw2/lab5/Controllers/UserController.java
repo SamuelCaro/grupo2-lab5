@@ -6,9 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sw2.lab5.entity.User;
+=======
+import sw2.lab5.repository.PostRepository;
+>>>>>>> 7a9265f6d5a53e3321abfbaf20e1047b7ecd4c7d
 import sw2.lab5.repository.UserRepository;
 
 import java.util.Optional;
@@ -19,10 +23,13 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    PostRepository postRepository;
 
 
     @GetMapping("/listaUser")
     public String listaUser (Model model){
+<<<<<<< HEAD
         model.addAttribute("listaUser", userRepository.findAll();
         return "user/list";
     }
@@ -55,5 +62,12 @@ public class UserController {
         return "redirect:/user/listaUser";
     }
 
+=======
+        model.addAttribute("listaUser", userRepository.findAll());
+        return "Gestor/G-ListaComunidad";
+    }
+
+
+>>>>>>> 7a9265f6d5a53e3321abfbaf20e1047b7ecd4c7d
 
 }
