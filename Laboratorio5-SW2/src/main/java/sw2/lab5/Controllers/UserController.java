@@ -17,7 +17,7 @@ public class UserController {
 
     @GetMapping("listaUser")
     public String listaUser (Model model){
-        model.addAttribute("listaUser", userRepository.findAll();
+        model.addAttribute("listaUser", userRepository.findAll());
         return "Gestor/G-ListaComunidad";
     }
 }
