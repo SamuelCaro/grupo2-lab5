@@ -20,7 +20,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.formLogin();
+        http.formLogin().loginPage("/loginForm").loginProcessingUrl("/processLogin")
+        .defaultSuccessUrl("/redirectByRole",true);
 
         http.authorizeRequests().antMatchers("/user/list").hasAuthority("admin");
         http.authorizeRequests().antMatchers("/user","/user/edit").hasAnyAuthority("admin","user");
@@ -29,6 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/post/create","/post/edit").hasAnyAuthority("admin","user");
 
         http.authorizeRequests().anyRequest().permitAll();
+
+        http.logout().logoutUrl("/cerrar").logoutSuccessUrl("/posts");
     }
 
     @Override

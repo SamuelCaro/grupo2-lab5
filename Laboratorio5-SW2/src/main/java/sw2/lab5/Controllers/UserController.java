@@ -11,4 +11,11 @@ public class UserController {
         model.addAttribute("listaComunidad", comunidadRepository.findAll());
         return "Gestor/G-ListaComunidad";
     }
+
+    @GetMapping(value = {"/posts"})
+    public String listarPosts(Model model) {
+        model.addAttribute("listaPosts", employeeRepository.findAll());
+        return "listarPost";
+    }
+
 }
