@@ -27,7 +27,7 @@ PostRepository postRepository;
     @GetMapping("listaPost")
     public String listaPost (Model model){
         model.addAttribute("listaPost", postRepository.findAll());
-        return "Gestor/ListarPost";
+        return "post/ListarPost";
     }
 
 
