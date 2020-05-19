@@ -12,6 +12,7 @@ public class Post {
 
     @Id
     @Column(name = "id_post")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idpost;
     @ManyToOne
     @JoinColumn(name = "author_id")
