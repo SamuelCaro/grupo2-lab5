@@ -13,20 +13,31 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     DataSource dataSource;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception  {
+    protected void configure(HttpSecurity http) throws Exception {
+
         http.formLogin();
-        http.authorizeRequests()
-            .anyRequest().permitAll();
+
+        http.authorizeRequests().antMatchers("/user/list").hasAuthority("admin");
+        http.authorizeRequests().antMatchers("/user","/user/edit").hasAnyAuthority("admin","user");
+
+        http.authorizeRequests().antMatchers("/post/delete").hasAuthority("admin");
+        http.authorizeRequests().antMatchers("/post/create","/post/edit").hasAnyAuthority("admin","user");
+
+        http.authorizeRequests().anyRequest().permitAll();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
-            .dataSource(dataSource)
-            .passwordEncoder(new BCryptPasswordEncoder());
+                .dataSource(dataSource)
+                .passwordEncoder(new BCryptPasswordEncoder())
+                .usersByUsernameQuery("SELECT email, pwd, activo FROM usuario WHERE email = ?")
+                .authoritiesByUsernameQuery("SELECT u.email, r.nombre, from  usuario  u inner join rol r on (u.idrol =r.idrol) " +
+                        "where u.email = ? and u.active = 1");
     }
 }
