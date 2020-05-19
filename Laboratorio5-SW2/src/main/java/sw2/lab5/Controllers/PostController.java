@@ -18,22 +18,20 @@ import java.util.Optional;
 
 public class PostController {
 
-@Autowired
-PostRepository postRepository;
-
-
+    @Autowired
+    PostRepository postRepository;
 
 
     @GetMapping("listaPost")
-    public String listaPost (Model model){
+    public String listaPost(Model model) {
         model.addAttribute("listaPost", postRepository.findAll());
-        return "Gestor/ListarPost";
+        return "post/ListarPost";
     }
 
 
     @GetMapping("editarpost")
     public String editarpost(@ModelAttribute("post") Post post, Model model,
-                             @RequestParam("idpost") int idpost){
+                             @RequestParam("idpost") int idpost) {
 
         Optional<Post> optPost = postRepository.findById(idpost);
         if (optPost.isPresent()) {
@@ -44,13 +42,6 @@ PostRepository postRepository;
             return "redirect:/post/ListarPost";
         }
     }
-
-
-
-
-
-
-
 
 
 }

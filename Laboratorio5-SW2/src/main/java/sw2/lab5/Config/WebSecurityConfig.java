@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .usersByUsernameQuery("SELECT email, pwd, activo FROM usuario WHERE email = ?")
-                .authoritiesByUsernameQuery("SELECT u.email, r.nombre, from  usuario  u inner join rol r on (u.idrol =r.idrol) " +
+                .authoritiesByUsernameQuery("SELECT u.email, r.role_name, from  user  u inner join role r on (u.idrole =r.idrole) " +
                         "where u.email = ? and u.active = 1");
     }
 }
