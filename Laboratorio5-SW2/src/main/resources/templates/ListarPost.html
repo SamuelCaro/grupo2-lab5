@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
+
+<div class="container-fluid">
+    <div class="col-lg-2">
+        <a class="btn btn-gray-900 btn-user btn-block" th:href="@{/post/NuevoPost}">Nuevo Post</a>
+    </div>
+    <br>
+    <div class="card shadowA mb-4">
+        <div class="card-header2 py-3">
+            <div class="d-flex justify-content-between centrado">
+                <h5 class="m-0 font-weight-bold text-redM">Lista de Posts</h5>
+            </div>
+        </div>
+        <div class="card-body bg-gray-100">
+            <div class="table-responsive bg-white">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr class="bg-gray-900 text-white" align="center">
+                        <th>Titulo</th>
+                        <th th:text="${Editar / borrar}" >Editar </th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr align="center">
+                        <th>Titulo</th>
+
+                        <th th:if="${user.id_role == 1}">Editar / Borrar</th>
+                        <th th:unless="${user.id_role == 1}">Editar </th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <tr align="center" th:each="post, info: ${listaPost}">
+                        <td th:text="${post.title}"></td>
+                        <td align="center">
+                            <a style="margin-left: 10px" th:href="@{'/post/editarpost' + '?idpost=' + ${post.idpost}}" >
+                                <i  class="far fa-list-alt text-orangeM"></i>
+                            </a>
+                            <a style="margin-left: 10px" th:href="@{'/postar/borrarpost' + '?idpost=' + ${post.idpost}}" >
+                                <i class="far fa-trash-alt text-redM"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 </body>
 </html>

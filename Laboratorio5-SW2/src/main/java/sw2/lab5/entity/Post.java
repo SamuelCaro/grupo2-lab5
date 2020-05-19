@@ -15,7 +15,7 @@ public class Post {
     private int idpost;
     @ManyToOne
     @JoinColumn(name = "author_id")
-    private User author_id;
+    private User authorid;
     @Column(name="title")
     @NotBlank(message = "Este campo no puede estar vacio")
     @Size(max = 75)
@@ -38,11 +38,11 @@ public class Post {
     }
 
     public User getAuthor_id() {
-        return author_id;
+        return authorid;
     }
 
     public void setAuthor_id(User author_id) {
-        this.author_id = author_id;
+        this.authorid = author_id;
     }
 
     public String getTitle() {
